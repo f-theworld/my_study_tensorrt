@@ -9,9 +9,16 @@
 ### Development environment
 
 - **Python**: 3.12 (system Python on Ubuntu 24.04)
+- **trtpy**: 1.2.6 — TensorRT Python helper (`python3 -m trtpy` for CLI, `import trtpy` in code)
 - **Linter**: `ruff` — run `ruff check .` from the workspace root
 - **Test framework**: `pytest` — run `pytest` from the workspace root
-- **No GPU/CUDA**: The Cloud Agent VM does not have an NVIDIA GPU or CUDA toolkit installed. TensorRT inference cannot be tested on the VM directly. Focus on CPU-compatible code and unit tests.
+- **No GPU/CUDA**: The Cloud Agent VM does not have an NVIDIA GPU or CUDA toolkit installed. TensorRT inference cannot be tested on the VM directly. `trtpy` runs in `NoInit` (sysmode) — module imports work but GPU-dependent features will fail.
+
+### trtpy notes
+
+- CLI entry point: `python3 -m trtpy <subcommand>` (the `trtpy` shell command may not be on PATH; always use the module form)
+- Environment was initialized with `python3 -m trtpy get-env --cuda=11`
+- Import convention: `import trtpy.init_default as trtpy`
 
 ### Running commands
 
